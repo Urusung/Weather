@@ -38,7 +38,10 @@ dependencies:
   shared_preferences: ^2.1.0
   flutter_spinkit: ^5.1.0
   syncfusion_flutter_gauges: ^21.1.41
-
+  http: ^0.13.6
+  permission_handler: ^10.2.0
+  geolocator: ^9.0.2
+  tuple: ^2.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
