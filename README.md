@@ -1,6 +1,6 @@
 # weather_app
 
-A new Flutter project.
+Flutter를 사용하여 개발한 날씨앱.
 
 ## Getting Started
 
