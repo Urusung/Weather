@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 class WeatherInfo {
   final String coordLongitude;
   final String coordLatitude;
@@ -70,34 +72,90 @@ class WeatherInfo {
       coordLongitude: json['coord']['lon'].toString(),
       coordLatitude: json['coord']['lat'].toString(),
       weatherId: json['weather'][0]['id'],
-      weatherMain: json['weather'][0]['main'],
+      weatherMain: getWeatherMain(json['weather'][0]['main'].toString()),
       weatherDescription: json['weather'][0]['description'],
       weatherIcon: json['weather'][0]['icon'],
       base: json['base'],
-      mainTemp: json['main']['temp'].toString(),
-      mainFeelsLike: json['main']['feels_like'].toString(),
-      mainTempMin: json['main']['temp_min'].toString(),
-      mainTempMax: json['main']['temp_max'].toString(),
+      mainTemp:
+          double.parse(json['main']['temp'].toString()).toStringAsFixed(0),
+      mainFeelsLike: double.parse(json['main']['feels_like'].toString())
+          .toStringAsFixed(0),
+      mainTempMin:
+          double.parse(json['main']['temp_min'].toString()).toStringAsFixed(0),
+      mainTempMax:
+          double.parse(json['main']['temp_max'].toString()).toStringAsFixed(0),
       mainPressure: json['main']['pressure'].toString(),
       mainHumidity: json['main']['humidity'].toString(),
       mainSeaLevel: json['main']['sea_level'].toString(),
       mainGrndLevel: json['main']['grnd_level'].toString(),
-      visibility: json['visibility'].toString(),
+      visibility: (double.parse(json['visibility'].toString()) / 1000)
+          .toStringAsFixed(0),
       windSpeed: json['wind']['speed'].toString(),
       windDeg: json['wind']['deg'].toString(),
       windGust: json['wind']['gust'].toString(),
-      rain1h: json['rain']['1h'].toString(),
+      rain1h: json['rain'] != null && json['rain']['1h'] != null
+          ? json['rain']['1h'].toString()
+          : '0',
       cloudsAll: json['clouds']['all'].toString(),
       dt: json['dt'].toString(),
       sysType: json['sys']['type'].toString(),
       sysId: json['sys']['id'].toString(),
       sysCountry: json['sys']['country'].toString(),
-      sysSunrise: json['sys']['sunrise'].toString(),
-      sysSunset: json['sys']['sunset'].toString(),
+      sysSunrise: DateFormat('a hh:mm', 'ko_KR').format(
+        DateTime.fromMillisecondsSinceEpoch(
+                int.parse(json['sys']['sunrise'].toString()) * 1000,
+                isUtc: true)
+            .toLocal(),
+      ),
+      sysSunset: DateFormat('a hh:mm', 'ko_KR').format(
+        DateTime.fromMillisecondsSinceEpoch(
+                int.parse(json['sys']['sunset'].toString()) * 1000,
+                isUtc: true)
+            .toLocal(),
+      ),
       timeZone: json['timezone'].toString(),
       id: json['id'].toString(),
       name: json['name'].toString(),
       cod: json['cod'].toString(),
     );
+  }
+}
+
+String getWeatherMain(String main) {
+  switch (main) {
+    case 'Thunderstorm':
+      return '천둥번개';
+    case 'Drizzle':
+      return '이슬비';
+    case 'Rain':
+      return '비';
+    case 'Snow':
+      return '눈';
+    case 'Atmosphere':
+      return '안개';
+    case 'Clear':
+      return '맑음';
+    case 'Clouds':
+      return '구름';
+    case 'Mist':
+      return '안개';
+    case 'Smoke':
+      return '연기';
+    case 'Haze':
+      return '실안개';
+    case 'Dust':
+      return '먼지';
+    case 'Fog':
+      return '안개';
+    case 'Sand':
+      return '모래';
+    case 'Ash':
+      return '화산재';
+    case 'Squall':
+      return '돌풍';
+    case 'Tornado':
+      return '토네이도';
+    default:
+      return '정보 없음';
   }
 }
