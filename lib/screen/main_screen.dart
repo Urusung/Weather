@@ -6,7 +6,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:http/http.dart' as http;
+import 'package:weather_app/model/weather_info_item_model.dart';
 import 'package:weather_app/riverpod/weather_and_address_provider.dart';
+import 'package:weather_app/widget/other_info_widget.dart';
 
 class MainScreen extends ConsumerStatefulWidget {
   const MainScreen({super.key});
@@ -26,7 +28,6 @@ class MainScreenState extends ConsumerState<MainScreen> {
   @override
   Widget build(BuildContext context) {
     final weatherAndAdressInfo = ref.watch(weatherAndAddressProvider);
-
     //String weatherId = weatherAndAdressInfo.value?.item1.weatherId.toString() ?? '--';
     String weatherMain = weatherAndAdressInfo.value?.item1.weatherMain ?? '--';
     String weatherDescription =
@@ -133,7 +134,7 @@ class MainScreenState extends ConsumerState<MainScreen> {
                     weatherMain,
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: weatherInfoContainerHeight * 0.07),
+                        fontSize: weatherInfoContainerHeight * 0.08),
                   ),
                   Padding(
                     padding: EdgeInsets.only(bottom: 8.0),
@@ -145,7 +146,7 @@ class MainScreenState extends ConsumerState<MainScreen> {
                         '최고:$mainTempMax°',
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: weatherInfoContainerHeight * 0.07),
+                            fontSize: weatherInfoContainerHeight * 0.08),
                       ),
                       Padding(
                         padding: EdgeInsets.only(right: 8.0),
@@ -154,7 +155,7 @@ class MainScreenState extends ConsumerState<MainScreen> {
                         '최저:$mainTempMin°',
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: weatherInfoContainerHeight * 0.07),
+                            fontSize: weatherInfoContainerHeight * 0.08),
                       ),
                     ],
                   ),
@@ -164,76 +165,22 @@ class MainScreenState extends ConsumerState<MainScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        padding: EdgeInsets.all(16.0),
-                        width: otherInfoContainerWidth,
-                        height: otherInfoContainerHeight,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(
-                            otherInfoContainerHeight / 10,
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '강우',
-                              style: TextStyle(
-                                  color: Colors.white.withOpacity(0.5),
-                                  fontSize: otherInfoContainerHeight * 0.08),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(bottom: 8.0),
-                            ),
-                            Text(
-                              '${rain1h}mm',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: otherInfoContainerHeight * 0.16),
-                            ),
-                            Text(
-                              '지난 1시간',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: otherInfoContainerHeight * 0.12),
-                            ),
-                          ],
-                        ),
+                      OtherInfoWidget(
+                        titleIcon: CupertinoIcons.drop_fill,
+                        title: '강우',
+                        value1: '${rain1h}mm',
+                        value2: '지난 1시간',
+                        value3: '',
                       ),
                       Padding(
                         padding: EdgeInsets.only(right: 8.0),
                       ),
-                      Container(
-                        padding: EdgeInsets.all(16.0),
-                        width: otherInfoContainerWidth,
-                        height: otherInfoContainerHeight,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(
-                            otherInfoContainerHeight / 10,
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '체감 온도',
-                              style: TextStyle(
-                                  color: Colors.white.withOpacity(0.5),
-                                  fontSize: otherInfoContainerHeight * 0.08),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(bottom: 8.0),
-                            ),
-                            Text(
-                              '$mainFeelsLike°',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: otherInfoContainerHeight * 0.16),
-                            ),
-                          ],
-                        ),
+                      OtherInfoWidget(
+                        titleIcon: CupertinoIcons.thermometer,
+                        title: '체감 온도',
+                        value1: '$mainFeelsLike°',
+                        value2: '',
+                        value3: '',
                       ),
                     ],
                   ),
@@ -243,83 +190,23 @@ class MainScreenState extends ConsumerState<MainScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        padding: EdgeInsets.all(16.0),
-                        width: otherInfoContainerWidth,
-                        height: otherInfoContainerHeight,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(
-                            otherInfoContainerHeight / 10,
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '습도',
-                              style: TextStyle(
-                                  color: Colors.white.withOpacity(0.5),
-                                  fontSize: otherInfoContainerHeight * 0.08),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(bottom: 8.0),
-                            ),
-                            Text(
-                              '${mainHumidity}%',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: otherInfoContainerHeight * 0.16),
-                            ),
-                          ],
-                        ),
+                      OtherInfoWidget(
+                        titleIcon: CupertinoIcons.drop_fill,
+                        title: '습도',
+                        value1: '$mainHumidity%',
+                        value2: '',
+                        value3: '',
                       ),
                       Padding(
                         padding: EdgeInsets.only(right: 8.0),
                       ),
-                      Container(
-                        padding: EdgeInsets.all(16.0),
-                        width: otherInfoContainerWidth,
-                        height: otherInfoContainerHeight,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(
-                            otherInfoContainerHeight / 10,
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '기압',
-                              style: TextStyle(
-                                  color: Colors.white.withOpacity(0.5),
-                                  fontSize: otherInfoContainerHeight * 0.08),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(bottom: 8.0),
-                            ),
-                            Text(
-                              '${mainPressure}hPa',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: otherInfoContainerHeight * 0.16),
-                            ),
-                            Spacer(),
-                            Text(
-                              '해수면 기압: ${mainSeaLevel}hPa',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: otherInfoContainerHeight * 0.08),
-                            ),
-                            Text(
-                              '지면 기압: ${mainGrndLevel}hPa',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: otherInfoContainerHeight * 0.08),
-                            ),
-                          ],
-                        ),
+                      OtherInfoWidget(
+                        titleIcon: CupertinoIcons.cloud_fill,
+                        title: '기압',
+                        value1: '${mainPressure}hPa',
+                        value2: '',
+                        value3:
+                            '지면 기압: ${mainGrndLevel}hPa\n해수면 기압: ${mainSeaLevel}hPa',
                       ),
                     ],
                   ),
@@ -329,89 +216,23 @@ class MainScreenState extends ConsumerState<MainScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        padding: EdgeInsets.all(16.0),
-                        width: otherInfoContainerWidth,
-                        height: otherInfoContainerHeight,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(
-                            otherInfoContainerHeight / 10,
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '바람',
-                              style: TextStyle(
-                                  color: Colors.white.withOpacity(0.5),
-                                  fontSize: otherInfoContainerHeight * 0.08),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(bottom: 8.0),
-                            ),
-                            Text(
-                              '풍속: ${windSpeed}m/s',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: otherInfoContainerHeight * 0.08),
-                            ),
-                            Text(
-                              '풍향: $windDeg°',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: otherInfoContainerHeight * 0.08),
-                            ),
-                            Text(
-                              '돌풍 속도: ${windGust}m/s',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: otherInfoContainerHeight * 0.08),
-                            ),
-                          ],
-                        ),
+                      OtherInfoWidget(
+                        titleIcon: CupertinoIcons.wind,
+                        title: '바람',
+                        value1: '',
+                        value2: '',
+                        value3:
+                            '풍속: ${windSpeed}m/s\n풍향: $windDeg°\n돌풍 속도: ${windGust}m/s',
                       ),
                       Padding(
                         padding: EdgeInsets.only(right: 8.0),
                       ),
-                      Container(
-                        padding: EdgeInsets.all(16.0),
-                        width: otherInfoContainerWidth,
-                        height: otherInfoContainerHeight,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(
-                            otherInfoContainerHeight / 10,
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '일출',
-                              style: TextStyle(
-                                  color: Colors.white.withOpacity(0.5),
-                                  fontSize: otherInfoContainerHeight * 0.08),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(bottom: 8.0),
-                            ),
-                            Text(
-                              sysSunrise,
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: otherInfoContainerHeight * 0.16),
-                            ),
-                            Spacer(),
-                            Text(
-                              '일몰: $sysSunset',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: otherInfoContainerHeight * 0.08),
-                            ),
-                          ],
-                        ),
+                      OtherInfoWidget(
+                        titleIcon: CupertinoIcons.sunrise_fill,
+                        title: '일출',
+                        value1: sysSunrise,
+                        value2: '',
+                        value3: '일몰: $sysSunset',
                       ),
                     ],
                   ),
@@ -421,70 +242,22 @@ class MainScreenState extends ConsumerState<MainScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
-                        padding: EdgeInsets.all(16.0),
-                        width: otherInfoContainerWidth,
-                        height: otherInfoContainerHeight,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(
-                            otherInfoContainerHeight / 10,
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '가시거리',
-                              style: TextStyle(
-                                  color: Colors.white.withOpacity(0.5),
-                                  fontSize: otherInfoContainerHeight * 0.08),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(bottom: 8.0),
-                            ),
-                            Text(
-                              '${visibility}km',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: otherInfoContainerHeight * 0.16),
-                            ),
-                          ],
-                        ),
+                      OtherInfoWidget(
+                        titleIcon: CupertinoIcons.eye_fill,
+                        title: '가시거리',
+                        value1: '${visibility}km',
+                        value2: '',
+                        value3: '',
                       ),
                       Padding(
                         padding: EdgeInsets.only(right: 8.0),
                       ),
-                      Container(
-                        padding: EdgeInsets.all(16.0),
-                        width: otherInfoContainerWidth,
-                        height: otherInfoContainerHeight,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.1),
-                          borderRadius: BorderRadius.circular(
-                            otherInfoContainerHeight / 10,
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '구름의 양',
-                              style: TextStyle(
-                                  color: Colors.white.withOpacity(0.5),
-                                  fontSize: otherInfoContainerHeight * 0.08),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(bottom: 8.0),
-                            ),
-                            Text(
-                              '$cloudsAll%',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: otherInfoContainerHeight * 0.16),
-                            ),
-                          ],
-                        ),
+                      OtherInfoWidget(
+                        titleIcon: CupertinoIcons.cloud_fill,
+                        title: '구름의 양',
+                        value1: '$cloudsAll%',
+                        value2: '',
+                        value3: '',
                       ),
                     ],
                   ),
