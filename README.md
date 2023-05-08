@@ -2,7 +2,7 @@
 
 <p align="center">
   <br>
-  <img src="[./images/common/logo-sample.jpeg](https://github.com/Urusung/Weather/issues/1#issue-1699397445)">
+  <img src="https://user-images.githubusercontent.com/96646202/236720076-80540dcb-6a5a-4cec-8e57-bf69872cf7b6.gif">
   <br>
 </p>
 
