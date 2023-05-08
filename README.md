@@ -21,11 +21,13 @@ GIF Images
 <br>
 
 ## 기술 스택
-
-| JavaScript | TypeScript |  React   |  Node   |
-| :--------: | :--------: | :------: | :-----: |
-|   ![js]    |   ![ts]    | ![react] | ![node] |
-
+Dart 언어
+Flutter 프레임워크
+OpenWeatherMap API (날씨 데이터 요청 API)
+GoogleMap API (현재 위치 한글 주소 요청 API)
+HTTP (API 호출에 사용)
+Geolocator (장치 위치 정보 수집에 사용)
+river_pod
 <br>
 
 ## 구현 기능
@@ -47,10 +49,3 @@ GIF Images
 </p>
 
 <br>
-
-<!-- Stack Icon Refernces -->
-
-[js]: /images/stack/javascript.svg
-[ts]: /images/stack/typescript.svg
-[react]: /images/stack/react.svg
-[node]: /images/stack/node.svg
