@@ -2,7 +2,7 @@
 
 <p align="center">
   <br>
-  <img src="./images/common/logo-sample.jpeg](https://github.com/Urusung/Weather/issues/1#issue-1699397445)">
+  <img src="[./images/common/logo-sample.jpeg](https://github.com/Urusung/Weather/issues/1#issue-1699397445)">
   <br>
 </p>
 
