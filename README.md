@@ -1,21 +1,15 @@
 # Weather
 
-<p align="center">
-  <br>
-  <img src="https://user-images.githubusercontent.com/96646202/236720076-80540dcb-6a5a-4cec-8e57-bf69872cf7b6.gif">
-  <br>
-</p>
-
 목차
 
 ## 프로젝트 소개
 
 <p align="justify">
-프로젝트 개요/동기
+openAPI사용을 해보기 위해 날씨 앱 개발
 </p>
 
 <p align="center">
-GIF Images
+<img src="https://user-images.githubusercontent.com/96646202/236720076-80540dcb-6a5a-4cec-8e57-bf69872cf7b6.gif">
 </p>
 
 <br>
