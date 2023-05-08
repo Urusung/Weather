@@ -27,7 +27,7 @@ final weatherAndAddressProvider =
 
     if (googleMapsUriResponse.statusCode == 200) {
       final address = jsonDecode(googleMapsUriResponse.body)['results'][0]
-          ['address_components'][2]['long_name'];
+          ['address_components'][1]['long_name'];
       return Tuple2(weatherInfo, address);
     } else {
       throw Exception('Failed to load address data');

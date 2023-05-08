@@ -22,7 +22,6 @@ class MainScreenState extends ConsumerState<MainScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    requestLocationPermission();
   }
 
   @override
@@ -75,7 +74,6 @@ class MainScreenState extends ConsumerState<MainScreen> {
         appBar: AppBar(
           title: Text(
             '',
-            style: TextStyle(color: Colors.white),
           ),
           foregroundColor: Colors.black,
           backgroundColor: Colors.transparent,
@@ -93,7 +91,7 @@ class MainScreenState extends ConsumerState<MainScreen> {
             ),
           ],
         ),
-        backgroundColor: Colors.lightBlue[900],
+        backgroundColor: Colors.lightBlue[700],
         body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: SafeArea(
@@ -271,24 +269,5 @@ class MainScreenState extends ConsumerState<MainScreen> {
         ),
       ),
     );
-  }
-
-  Future<void> requestLocationPermission() async {
-    await Permission.location.request();
-    var permissionLocationStatus = await Permission.location.status;
-
-    if (permissionLocationStatus.isGranted) {
-      // 요청 동의됨
-      if (await Permission.locationWhenInUse.serviceStatus.isEnabled) {
-        // 요청 동의 + gps 켜짐
-        print("serviceStatusIsEnabled position");
-      } else {
-        // 요청 동의 + gps 꺼짐
-        print("serviceStatusIsDisabled");
-      }
-    } else {
-      // 요청 거부됨
-      print("requestLocationStatus.isDenied");
-    }
   }
 }

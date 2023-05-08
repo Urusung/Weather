@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:weather_app/screen/main_screen.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:weather_app/screen/splash_screen.dart';
 
 Future<void> main() async {
   await initializeDateFormatting();
@@ -22,7 +23,7 @@ Future<void> main() async {
           );
         },
         debugShowCheckedModeBanner: false,
-        home: MainScreen(),
+        home: SplashScreen(),
       ),
     ),
   );
