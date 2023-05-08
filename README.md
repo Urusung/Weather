@@ -5,7 +5,7 @@
 ## 프로젝트 소개
 
 <p align="justify">
-openAPI사용을 해보기 위해 날씨 앱 개발
+openAPI 사용 해보기 위해 날씨 앱 개발
 </p>
 
 <p align="center">
@@ -16,12 +16,19 @@ openAPI사용을 해보기 위해 날씨 앱 개발
 
 ## 기술 스택
 ### Dart
+
 ### Flutter
+
 ### OpenWeatherMap API (날씨 데이터 요청 API)
+
 ### GoogleMap API (현재 위치 한글 주소 요청 API)
+
 ### HTTP (API 호출에 사용)
+
 ### Geolocator (장치 위치 정보 수집에 사용)
+
 ### river_pod
+
 <br>
 
 ## 구현 기능
@@ -33,6 +40,6 @@ openAPI사용을 해보기 위해 날씨 앱 개발
 ### 날씨 데이터 화면 위젯에 보여주기
 
 ### 날씨 데이터 다시 불러오기 기능
-
+<br>
 
 
