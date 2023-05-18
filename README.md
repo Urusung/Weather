@@ -8,7 +8,7 @@
 openAPI 사용하여 현재 위치 날씨를 알려주는 앱 개발
 </p>
 
-<p align="center">
+<p align="justify">
 <img src="https://user-images.githubusercontent.com/96646202/236720076-80540dcb-6a5a-4cec-8e57-bf69872cf7b6.gif">
 </p>
 
