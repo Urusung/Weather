@@ -5,7 +5,7 @@
 ## 프로젝트 소개
 
 <p align="justify">
-openAPI 사용 해보기 위해 날씨 앱 개발
+openAPI 사용하여 현재 위치 날씨를 알려주는 앱 개발
 </p>
 
 <p align="center">
@@ -27,7 +27,10 @@ openAPI 사용 해보기 위해 날씨 앱 개발
 
 ### Geolocator (장치 위치 정보 수집에 사용)
 
-### river_pod
+### river_pod (상태 관리 라이브러리)
+
+### permission_handler (권한 요청 라이브러리)
+
 
 <br>
 
